@@ -1,0 +1,35 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - VERSION=0.13.2
+
+matrix:
+  include:
+    - env: PYBASEVER=2.7 ARCH=x86_64
+    - env: PYBASEVER=3.6 ARCH=x86_64
+    - env: PYBASEVER=3.7 ARCH=x86_64
+
+install:
+  - docker pull openturns/archlinux-mingw
+
+script:
+  - docker run -e MAKEFLAGS='-j2' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh ${VERSION} ${PYBASEVER} ${ARCH} `id -u` `id -g`
+  # docker run -e MAKEFLAGS='-j8' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh 0.13.2 3.6 x86_64 `id -u` `id -g`
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "aZ1cZfXSaNSw2xzm6xQQNlWKZD+qje08bFv8nBH3YkZ1N/8G6YQvjrhIJsgatV03UHgFe4Xcn8KmlqsKHhRSd4NIuvVnpv07jXwri93TzIzQo9Sc3FqpMlGp0ERqicgrTR5vJODxanEFb3bskY0pFr9ujTwBNAo9X3c+9mNo6FtfihqDGGlvVvK8DywNWJoLd8EgzkBmwjp/1y6bM71l2nkZnnQchLys1b3mtfZx4KviEu/Vrw/3G5/IYErd611IBp7Es4L9H3COqvxlzghoHA0NQtN2sctCxOlV8U29/amSMZSIyCu2Y70x/QZF+GxBbNw7c8Kbu3MhvexAX1n8w8fKWJ+t50UhKICttSqxrCr0J5cYaKnYCgBJwtoxTWZWQY6BTp/VKYE+A2PHr6RvptLd34wWGU+TL19AXHga7SgWDmN7k7ccoKvCd2mIXFxLc6PWh5kU2TxrBcts7v9rmwAqgc89C+I8cSGzZ1+8h9G2XZq6frQiP++Q5PNWtHWMkIqq4G8OGRG1SmPKhHUKoWPth89/pMfXNfvfjyVw4t69l/ohp2pD0edACsb/P1pXwNvH938CSqi9vR6coPlkqQoLUEHHbZbRuSPPnfbY8tWDqGimsFP/cCHhIRVNDiaqhRyNzzMfYOn9dgmQC2LX5hexr1qJiJXkE9LcE+GB2/M="
+  file_glob: true
+  file:
+    - ${TRAVIS_BUILD_DIR}/*.zip
+  repo: openturns/build-agrum
+  skip_cleanup: true
+  overwrite: true
+  on:
+    tags: true
