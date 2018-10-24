@@ -29,14 +29,14 @@ git clone https://gitlab.com/agrumery/aGrUM.git workdir
 cd workdir
 git checkout ${VERSION}
 PREFIX=$PWD/install
-CXXFLAGS="-D_hypot=hypot -DNDEBUG" ${ARCH}-w64-mingw32-cmake \
+CXXFLAGS="-D_hypot=hypot -DNDEBUG -DMS_WIN64" ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
   -DPYTHON_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
   -DPYTHON_SITE_PACKAGES=Lib/site-packages \
   -DFOR_PYTHON3=${FOR_PYTHON3} \
-    .
+   .
 make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
 
