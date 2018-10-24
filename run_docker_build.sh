@@ -18,6 +18,12 @@ MINGW_PREFIX=/usr/${ARCH}-w64-mingw32
 uid=$4
 gid=$5
 
+FOR_PYTHON3=ON
+if test "${PYBASEVER}" = "2.7"
+then
+  FOR_PYTHON3=OFF
+fi
+
 cd /tmp
 git clone https://gitlab.com/agrumery/aGrUM.git workdir
 cd workdir
@@ -29,6 +35,7 @@ CXXFLAGS="-D_hypot=hypot -DNDEBUG" ${ARCH}-w64-mingw32-cmake \
   -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
   -DPYTHON_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
   -DPYTHON_SITE_PACKAGES=Lib/site-packages \
+  -DFOR_PYTHON3=${FOR_PYTHON3} \
     .
 make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
