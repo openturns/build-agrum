@@ -7,5 +7,4 @@ do
   wget -c https://github.com/openturns/build-agrum/releases/download/v${release}/${_file} -P /tmp
 done
 
-sha256sum /tmp/*.tar.gz
 sha256sum /tmp/*.zip
