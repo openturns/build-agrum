@@ -36,13 +36,18 @@ CXXFLAGS="-D_hypot=hypot -DNDEBUG -DMS_WIN64" ${ARCH}-w64-mingw32-cmake \
   -DPYTHON_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
   -DPYTHON_SITE_PACKAGES=Lib/site-packages \
   -DFOR_PYTHON3=${FOR_PYTHON3} \
-   .
+  -DUSE_SWIG=OFF \
+  .
 make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
 
-cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread}*.dll ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/pyAgrum
+cd ${PREFIX}/Lib/site-packages
+cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread}*.dll ${PREFIX}/bin/*.dll pyAgrum
 
-cd ${PREFIX}/Lib/site-packages/ && zip -r /tmp/workdir/agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum && cd -
+mkdir numpy
+${ARCH}-w64-mingw32-python${PYMAJMIN}-bin -c "import pyAgrum as gum; bn = gum.fastBN('a->b->d;a->c->d->e;f->b'); bn.generateCPTs(); ie = gum.LazyPropagation(bn); print(ie.posterior('d'))"
+
+zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
 
 if test -n "${uid}" -a -n "${gid}"
 then
