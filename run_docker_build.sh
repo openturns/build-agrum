@@ -29,6 +29,7 @@ git clone https://gitlab.com/agrumery/aGrUM.git workdir
 cd workdir
 git checkout ${VERSION}
 PREFIX=$PWD/install
+# https://gitlab.com/agrumery/aGrUM/issues/15
 CXXFLAGS="-D_hypot=hypot -DNDEBUG -DMS_WIN64 -fno-strict-aliasing" ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
