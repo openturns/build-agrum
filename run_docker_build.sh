@@ -46,7 +46,7 @@ cd ${PREFIX}/Lib/site-packages
 cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread}*.dll ${PREFIX}/bin/*.dll pyAgrum
 
 touch numpy.py
-${ARCH}-w64-mingw32-python${PYMAJMIN}-bin -c "import pyAgrum as gum; bn = gum.fastBN('a->b->d;a->c->d->e;f->b'); bn.generateCPTs(); ie = gum.LazyPropagation(bn); print(ie.posterior('d'))"
+${ARCH}-w64-mingw32-python${PYMAJMIN}-bin -c "import pyAgrum as gum; bn = gum.fastBN('a->b->d;a->c->d->e;f->b'); ie = gum.LazyPropagation(bn); ie.makeInference(); print(ie.posterior('d'))"
 
 zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
 
