@@ -30,7 +30,7 @@ cd workdir
 git checkout ${VERSION}
 PREFIX=$PWD/install
 # https://gitlab.com/agrumery/aGrUM/issues/15
-CXXFLAGS="-D_hypot=hypot -DNDEBUG -DMS_WIN64 -fno-strict-aliasing" ${ARCH}-w64-mingw32-cmake \
+CXXFLAGS="-DNDEBUG -fno-strict-aliasing -fno-tree-vrp" ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
