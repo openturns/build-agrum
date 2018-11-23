@@ -28,9 +28,13 @@ cd /tmp
 git clone https://gitlab.com/agrumery/aGrUM.git workdir
 cd workdir
 git checkout ${VERSION}
+
+# https://gitlab.com/agrumery/aGrUM/issues/20
+curl -L https://gitlab.com/agrumery/aGrUM/merge_requests/156.patch | patch -p1
+
 PREFIX=$PWD/install
 # https://gitlab.com/agrumery/aGrUM/issues/15
-CXXFLAGS="-DNDEBUG -fno-strict-aliasing -fno-tree-vrp" ${ARCH}-w64-mingw32-cmake \
+CXXFLAGS="-DNDEBUG -fno-strict-aliasing" ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
