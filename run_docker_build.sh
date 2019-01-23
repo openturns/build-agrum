@@ -22,6 +22,7 @@ cd /tmp
 git clone https://gitlab.com/agrumery/aGrUM.git workdir
 cd workdir
 git checkout ${VERSION}
+curl -L https://gist.githubusercontent.com/jschueller/1c4d0c3fe00088d1348043e289e8a9c0/raw/1ee31072ca62272b9179d7dc81e530688db1a21d/reg4multidim_singleton.patch | patch -p1
 
 PREFIX=$PWD/install
 # https://gitlab.com/agrumery/aGrUM/issues/15
