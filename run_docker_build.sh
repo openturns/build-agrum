@@ -19,10 +19,10 @@ uid=$4
 gid=$5
 
 cd /tmp
-git clone https://gitlab.com/agrumery/aGrUM.git workdir
-cd workdir
-git checkout ${VERSION}
-curl -L https://gist.githubusercontent.com/jschueller/1c4d0c3fe00088d1348043e289e8a9c0/raw/1ee31072ca62272b9179d7dc81e530688db1a21d/reg4multidim_singleton.patch | patch -p1
+curl -L https://gitlab.com/agrumery/aGrUM/-/archive/${VERSION}/aGrUM-${VERSION}.tar.gz | tar xz
+cd aGrUM-${VERSION}
+# https://gitlab.com/agrumery/aGrUM/issues/24
+curl -L https://gitlab.com/agrumery/aGrUM/merge_requests/175.patch | patch -p1
 
 PREFIX=$PWD/install
 # https://gitlab.com/agrumery/aGrUM/issues/15
@@ -41,7 +41,7 @@ cd ${PREFIX}/Lib/site-packages
 cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread}*.dll ${PREFIX}/bin/*.dll pyAgrum
 
 touch numpy.py
-${ARCH}-w64-mingw32-python${PYMAJMIN}-bin -c "import pyAgrum as gum; bn = gum.fastBN('a->b->d;a->c->d->e;f->b'); ie = gum.LazyPropagation(bn); ie.makeInference(); print(ie.posterior('d'))"
+PYTHONPATH=${PREFIX}/Lib/site-packages ${ARCH}-w64-mingw32-python${PYMAJMIN}-bin /io/mingw_test.py
 
 zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
 
