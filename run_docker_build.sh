@@ -21,12 +21,9 @@ gid=$5
 cd /tmp
 curl -L https://gitlab.com/agrumery/aGrUM/-/archive/${VERSION}/aGrUM-${VERSION}.tar.gz | tar xz
 cd aGrUM-${VERSION}
-# https://gitlab.com/agrumery/aGrUM/issues/24
-curl -L https://gitlab.com/agrumery/aGrUM/merge_requests/175.patch | patch -p1
 
 PREFIX=$PWD/install
-# https://gitlab.com/agrumery/aGrUM/issues/15
-CXXFLAGS="-fno-strict-aliasing" ${ARCH}-w64-mingw32-cmake \
+${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
