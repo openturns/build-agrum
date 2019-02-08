@@ -35,7 +35,7 @@ make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
 
 cd ${PREFIX}/Lib/site-packages
-cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread}*.dll ${PREFIX}/bin/*.dll pyAgrum
+cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread,libssp}*.dll ${PREFIX}/bin/*.dll pyAgrum
 
 touch numpy.py
 PYTHONPATH=${PREFIX}/Lib/site-packages ${ARCH}-w64-mingw32-python${PYMAJMIN}-bin /io/mingw_test.py
