@@ -6,7 +6,7 @@ services:
 
 env:
   global:
-    - VERSION=0.14.0
+    - VERSION=0.14.1
 
 matrix:
   include:
@@ -19,7 +19,6 @@ install:
 
 script:
   - docker run -e MAKEFLAGS='-j2' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh ${VERSION} ${PYBASEVER} ${ARCH} `id -u` `id -g`
-  # docker run -e MAKEFLAGS='-j8' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh 0.13.6 3.6 x86_64 `id -u` `id -g`
 
 deploy:
   provider: releases
