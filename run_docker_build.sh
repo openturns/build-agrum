@@ -38,6 +38,7 @@ cd ${PREFIX}/Lib/site-packages
 cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread,libssp}*.dll ${PREFIX}/bin/*.dll pyAgrum
 
 touch numpy.py
+curl -fSsLO https://raw.githubusercontent.com/benjaminp/six/master/six.py
 PYTHONPATH=${PREFIX}/Lib/site-packages ${ARCH}-w64-mingw32-python${PYMAJMIN}-bin /io/mingw_test.py
 
 zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
