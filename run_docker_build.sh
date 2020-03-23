@@ -30,6 +30,7 @@ ${ARCH}-w64-mingw32-cmake \
   -DPYTHON_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
   -DPYTHON_INSTALL=Lib/site-packages \
   -DUSE_SWIG=OFF \
+  -DBUILD_PYTHON=ON \
   .
 make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
