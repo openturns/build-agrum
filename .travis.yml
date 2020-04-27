@@ -6,7 +6,7 @@ services:
 
 env:
   global:
-    - VERSION=0.17.2
+    - VERSION=0.17.3
 
 matrix:
   include:
