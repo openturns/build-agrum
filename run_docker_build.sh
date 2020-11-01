@@ -40,10 +40,6 @@ cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread,libssp}*.dll
 
 touch numpy.py
 curl -fSsLO https://raw.githubusercontent.com/benjaminp/six/master/six.py
-if test "${PYBASEVER}" = "2.7"
-then
-  curl -SsL https://pypi.io/packages/source/c/configparser/configparser-4.0.2.tar.gz | tar xz && cp -rv configparser-*/src/* .
-fi
 PYTHONPATH=${PREFIX}/Lib/site-packages ${ARCH}-w64-mingw32-python${PYMAJMIN}-bin /io/mingw_test.py
 
 zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
