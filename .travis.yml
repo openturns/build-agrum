@@ -1,4 +1,5 @@
 language: generic
+dist: bionic
 
 services:
   - docker
@@ -15,10 +16,10 @@ matrix:
     - env: PYBASEVER=3.9 ARCH=x86_64
 
 install:
-  - docker pull openturns/archlinux-mingw@sha256:963e342099eec72d264c5b2f470195897a4b746b27fcdb1518a31ab0831688a1
+  - docker pull openturns/archlinux-mingw
 
 script:
-  - docker run -e MAKEFLAGS='-j2' -v `pwd`:/io openturns/archlinux-mingw@sha256:963e342099eec72d264c5b2f470195897a4b746b27fcdb1518a31ab0831688a1 /io/run_docker_build.sh ${VERSION} ${PYBASEVER} ${ARCH} `id -u` `id -g`
+  - docker run -e MAKEFLAGS='-j2' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh ${VERSION} ${PYBASEVER} ${ARCH} `id -u` `id -g`
 
 deploy:
   provider: releases
