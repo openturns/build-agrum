@@ -4,19 +4,19 @@ set -xe
 
 usage()
 {
-  echo "Usage: $0 VERSION PYBASEVER ARCH [uid] [gid]"
+  echo "Usage: $0 VERSION PYBASEVER [uid] [gid]"
   exit 1
 }
 
-test $# -ge 3 || usage
+test $# -ge 2 || usage
 
 VERSION=$1
 PYBASEVER=$2
 PYMAJMIN=${PYBASEVER:0:1}${PYBASEVER:2:1}
-ARCH=$3
+ARCH=x86_64
 MINGW_PREFIX=/usr/${ARCH}-w64-mingw32
-uid=$4
-gid=$5
+uid=$3
+gid=$4
 
 cd /tmp
 curl -L https://gitlab.com/agrumery/aGrUM/-/archive/${VERSION}/aGrUM-${VERSION}.tar.gz | tar xz

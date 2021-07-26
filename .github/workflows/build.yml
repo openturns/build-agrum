@@ -1,0 +1,30 @@
+name: Build
+on: [push]
+jobs:
+  mingw:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [0.21.0]
+        pyver: [3.6, 3.7, 3.8, 3.9]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: docker pull openturns/archlinux-mingw && docker run -e MAKEFLAGS='-j2' -v `pwd`:/io openturns/archlinux-mingw /io/run_docker_build.sh ${{ matrix.version }} ${{ matrix.pyver }} `id -u` `id -g`
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./agrum-${{ matrix.version }}-py${{ matrix.pyver }}-x86_64.zip
+          asset_name: agrum-${{ matrix.version }}-py${{ matrix.pyver }}-x86_64.zip
+          asset_content_type: application/zip
