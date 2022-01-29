@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [0.22.5]
-        pyver: ['3.7', '3.8', '3.9', '3.10']
+        version: [0.22.6]
+        pyver: ['3.8', '3.9', '3.10']
     steps:
       - uses: actions/checkout@v2
       - name: Build
