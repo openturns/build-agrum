@@ -25,10 +25,10 @@ cd aGrUM-${VERSION}
 PREFIX=$PWD/install
 ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
-  -DPYTHON_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
-  -DPYTHON_LIBRARY=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
-  -DPYTHON_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
-  -DPYTHON_INSTALL=Lib/site-packages \
+  -DPython_INCLUDE_DIRS=${MINGW_PREFIX}/include/python${PYMAJMIN} \
+  -DPython_LIBRARIES=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
+  -DPython_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
+  -DPython_INSTALL=Lib/site-packages \
   -DUSE_SWIG=OFF \
   -DBUILD_PYTHON=ON \
   .
