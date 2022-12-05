@@ -26,6 +26,8 @@ PREFIX=$PWD/install
 ${ARCH}-w64-mingw32-cmake \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_INSTALL_LIBDIR=lib \
   -DPython_EXECUTABLE=/usr/bin/${ARCH}-w64-mingw32-python${PYMAJMIN}-bin \
+  -DPython_LIBRARIES=${MINGW_PREFIX}/lib/libpython${PYMAJMIN}.dll.a \
+  -DPython_INCLUDE_DIRS=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DUSE_SWIG=OFF \
   -DBUILD_PYTHON=ON \
   .
