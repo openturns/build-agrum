@@ -41,7 +41,7 @@ touch numpy.py
 curl -fSsLO https://raw.githubusercontent.com/benjaminp/six/master/six.py
 PYTHONPATH=${PREFIX}/Lib/site-packages ${ARCH}-w64-mingw32-python${PYMAJMIN}-bin /io/mingw_test.py
 
-zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum
+zip -r agrum-${VERSION}-py${PYBASEVER}-${ARCH}.zip pyAgrum*
 
 if test -n "${uid}" -a -n "${gid}"
 then
