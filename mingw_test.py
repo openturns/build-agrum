@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-import pyAgrum as gum
+import pyagrum as gum
 
 # https://gitlab.com/agrumery/aGrUM/issues/15
 bn = gum.fastBN('a->b->d;a->c->d->e;f->b')
