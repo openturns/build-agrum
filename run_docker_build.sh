@@ -30,12 +30,13 @@ ${ARCH}-w64-mingw32-cmake \
   -DPython_INCLUDE_DIR=${MINGW_PREFIX}/include/python${PYMAJMIN} \
   -DUSE_SWIG=OFF \
   -DBUILD_PYTHON=ON \
+  -DAGRUM_PYTHON_SABI=OFF \
   .
 make install
 ${ARCH}-w64-mingw32-strip --strip-unneeded ${PREFIX}/bin/*.dll ${PREFIX}/Lib/site-packages/*/*.pyd
 
 cd ${PREFIX}/Lib/site-packages
-cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread,libssp}*.dll ${PREFIX}/bin/*.dll pyAgrum
+cp -v ${MINGW_PREFIX}/bin/{libgcc_s,libstdc++,libgomp,libwinpthread,libssp}*.dll ${PREFIX}/bin/*.dll pyagrum
 
 touch numpy.py
 curl -fSsLO https://raw.githubusercontent.com/benjaminp/six/master/six.py
